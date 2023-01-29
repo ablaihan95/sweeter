@@ -15,13 +15,18 @@
        aria-controls="collapseExample">
         Add new message...
     </a>
-    <div id="collapseExample" class="collapse">
-        <div class="form-group">
+    <div id="collapseExample" class="collapse <#if message??>show</#if>">
+        <div class="form-group mt-3">
             <form method="post" enctype="multipart/form-data">
-                <div class="form-group mt-3">
-                    <label>
-                        <input class="form-inline" type="text" name="text" placeholder="enter value"/>
-                    </label>
+                <div class="form-group">
+                    <input class="form-inline ${(textError??)?string('is-invalid', "")}"
+                           value="<#if message??>${message.text}</#if>" type="text" name="text"
+                           placeholder="enter value"/>
+                    <#if textError??>
+                        <div class="invalid-feedback">
+                            ${textError}
+                        </div>
+                    </#if>
                 </div>
                 <div class="form-group">
                     <label>
@@ -46,24 +51,24 @@
             <p>${error!}</p>
         </div>
     </div>
-        <div class="card-columns">
-            <#list messages as message>
-                <div class="card my-3" style="width: 18rem">
+    <div class="card-columns">
+        <#list messages as message>
+            <div class="card my-3" style="width: 18rem">
+                <div>
+                    <#if message.filename??>
+                        <img src="/img/${message.filename}" class="card-img-top">
+                    </#if>
+                </div>
+                <div class="m-2">
                     <div>
-                        <#if message.filename??>
-                            <img src="/img/${message.filename}" class="card-img-top">
-                        </#if>
+                        <span>${message.text}</span>
+                        <i>${message.tag}</i>
                     </div>
-                    <div class="m-2">
-                        <div>
-                            <span>${message.text}</span>
-                            <i>${message.tag}</i>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <strong>${message.authorName!}</strong>
-                        </div>
+                    <div class="card-footer text-muted">
+                        <strong>${message.authorName!}</strong>
                     </div>
                 </div>
-            </#list>
-        </div>
-        </@c.page>
+            </div>
+        </#list>
+    </div>
+    </@c.page>

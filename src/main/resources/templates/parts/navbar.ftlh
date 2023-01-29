@@ -15,9 +15,15 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/main">Messages</a>
             </li>
+
             <li class="nav-item active">
                 <a class="nav-link" href="/user">User List</a>
             </li>
+             <#if user??>
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/profile">Profile</a>
+            </li>
+            </#if>
         </ul>
 <#--    <div class="navbar-text">${name}</div>-->
         <@l.logout></@l.logout>

@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 import lombok.Getter;
@@ -28,11 +30,15 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "username cant be empty")
     private String username;
     private String firstname;
+    @NotBlank(message = "password cant be empty")
     private String password;
     private boolean isActive;
     private String email;
+    @Transient
+    private String password2;
     private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

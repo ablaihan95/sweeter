@@ -3,6 +3,6 @@
 <@c.page>
 Add new user
     ${message!}
-<@l.reg>
-</@l.reg>
+<@l.login "/registration" true>
+</@l.login>
 </@c.page>

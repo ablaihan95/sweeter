@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "123"
+      POSTGRES_USER: "admin"
+#      POSTGRES_DB: "sweater"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - "5432:5432"
+    volumes:
+      - .:/var/lib/data/postgres
+
+#volumes:
+#  postgres-db:
+#    driver: local
